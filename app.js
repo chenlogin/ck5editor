@@ -1,4 +1,4 @@
-//自定义插件，答题线
+//答题线
 import classiceditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import inlineeditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
@@ -30,8 +30,12 @@ import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64u
 import GeneralHtmlSupport from '@ckeditor/ckeditor5-html-support/src/generalhtmlsupport';
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
 
-
 import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
+
+import Block  from './packages/plugin-block/block.js';
+import Tip from './packages/plugin-tips/tip';
+import CustomBold from './packages/plugin-bold/main';
+import Blank from './packages/plugin-blank/index';
 
 /**
  * A plugin extending General HTML Support for example custom HTML elements.
@@ -115,6 +119,10 @@ const config = {
     Mathematics,
     AutoformatMathematics,
     SourceEditing,
+    Block,
+    Tip,
+    CustomBold,
+    Blank,
   ],
   language: {
     // The UI will be English.
@@ -138,6 +146,7 @@ const config = {
       'code', 'codeBlock', 'SourceEditing', '|',
       'insertTable', 'math', '|',
       'uploadImage','blockQuote', 'linkImage', '|', 
+      'Block','Tip','ck-custom-bold','yq-blank',
     ], 
     shouldNotGroupWhenFull: false
   },
@@ -251,7 +260,7 @@ classiceditor
   .create( document.querySelector( '#classic-editor' ), config)
   .then( editor => {
       console.log( 'Editor was initialized', editor );
-      console.log('检索所有可用的工具栏项', editor.ui.componentFactory.names());
+      console.log('检索所有可用的工具栏项', Array.from( editor.ui.componentFactory.names() ));
 
       editor.model.document.on( 'change', () => {
         console.log( 'The document has changed!' );
@@ -260,6 +269,13 @@ classiceditor
           console.log( 'The data has changed!' );
           getData();
       } );
+      // 监听模块的点击事件
+      editor.editing.view.document.on('click', (evt, data) => {
+        if (data.domTarget.className == 'edit'){
+          console.log("监听模块的点击事件");
+        }
+      });
+
       window.ckeditor = editor;
       CKEditorInspector.attach( editor );
   } )
