@@ -32,10 +32,10 @@ import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting'
 
 import CKEditorInspector from '@ckeditor/ckeditor5-inspector';
 
-import Block  from './packages/plugin-block/block.js';
-import Tip from './packages/plugin-tips/tip';
-import CustomBold from './packages/plugin-bold/main';
-import Blank from './packages/plugin-blank/index';
+import Block  from '@plugin/plugin-block/block.js';
+import Tip from '@plugin/plugin-tips/tip';
+import CustomBold from '@plugin/plugin-bold/main';
+import Blank from '@plugin/plugin-blank/index';
 
 /**
  * A plugin extending General HTML Support for example custom HTML elements.
@@ -274,6 +274,10 @@ classiceditor
         if (data.domTarget.className == 'edit'){
           console.log("监听模块的点击事件");
         }
+        if (data.domTarget.className == 'closeIcon' || data.domTarget.className == 'close' ) {
+          const selection = editor.model.document.selection;
+          editor.model.document.model.deleteContent(selection)
+        };
       });
 
       window.ckeditor = editor;
