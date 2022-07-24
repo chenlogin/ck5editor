@@ -1,5 +1,6 @@
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { COMMAND_NAME__BLOCK } from './constant';
 
 // 这个模块是用来监听 click的
 import ClickObserver from '@ckeditor/ckeditor5-engine/src/view/observer/clickobserver';
@@ -12,9 +13,9 @@ export default class BoxUI extends Plugin {
 
     // “block”按钮必须在编辑器的UI组件中注册
     // 将显示在工具栏中。
-    editor.ui.componentFactory.add('block', locale => {
+    editor.ui.componentFactory.add(COMMAND_NAME__BLOCK, locale => {
       const view = editor.editing.view;
-      const command = editor.commands.get('block');
+      const command = editor.commands.get(COMMAND_NAME__BLOCK);
 
       // 使用模块
       view.addObserver(ClickObserver);
@@ -30,7 +31,7 @@ export default class BoxUI extends Plugin {
       // 将按钮的状态绑定到命令。
       buttonView.bind('isOn', 'isEnabled').to(command, 'value', 'isEnabled');
       // 单击(执行)按钮时执行命令。
-      this.listenTo(buttonView, 'execute', () => editor.execute('block'));
+      this.listenTo(buttonView, 'execute', () => editor.execute(COMMAND_NAME__BLOCK));
 
       return buttonView;
     });

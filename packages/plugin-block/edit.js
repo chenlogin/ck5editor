@@ -2,7 +2,8 @@
 // 插件类，需要基于这个扩展
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
 // 在这个文件里面创建命令
-import command from './blockcommad.js';
+import command from './commad.js';
+import { COMMAND_NAME__BLOCK, SCHEMA_NAME__BLOCK } from './constant';
 
 export default class Blockedit extends Plugin {
   init() {
@@ -13,7 +14,7 @@ export default class Blockedit extends Plugin {
     this._defineConverters();
 
     // 绑定一个事件 block
-    this.editor.commands.add('block', new command(this.editor));
+    this.editor.commands.add(COMMAND_NAME__BLOCK, new command(this.editor));
   }
 
   // 具体参数看文档： https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_model_schema-Schema.html

@@ -26,9 +26,9 @@ function createTip(writer) {
 
   // 创建内容
   const paragraph1 = writer.createElement('paragraph');
-  writer.appendText('1. 多喝水', paragraph1);
+  writer.appendText('1. 提示文案一', paragraph1);
   const paragraph2 = writer.createElement('paragraph');
-  writer.appendText('2. 多喝热水', paragraph2);
+  writer.appendText('2. 提示文案二', paragraph2);
   writer.insert(paragraph, tipTitle, 0);
   writer.insert(paragraph1, tipContent, 0);
   writer.insert(paragraph2, tipContent, 1);
