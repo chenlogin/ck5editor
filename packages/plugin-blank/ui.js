@@ -1,6 +1,6 @@
 import Plugin from '@ckeditor/ckeditor5-core/src/plugin'
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview'
-import icon from './theme/icons/blank.svg'
+import icon from '../../src/theme/icons/blank.svg'
 import { COMMAND_NAME__BLANK, COMMAND_LABEL__BLANK } from './constant'
 
 export default class BlankToolbarUI extends Plugin {
